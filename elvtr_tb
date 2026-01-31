@@ -1,0 +1,74 @@
+`timescale 1ns/1ps
+
+module elevator_tb;
+
+    reg clk;
+    reg rst;
+    reg [2:0] req_floor;
+
+    wire [2:0] curr_floor;
+    wire up;
+    wire down;
+    wire door;
+
+    // DUT
+    elevator uut (
+        .clk(clk),
+        .rst(rst),
+        .req_floor(req_floor),
+        .curr_floor(curr_floor),
+        .up(up),
+        .down(down),
+        .door(door)
+    );
+
+    // Clock (10ns period)
+    initial begin
+        clk = 0;
+        forever #5 clk = ~clk;
+    end
+
+    // Test sequence
+    initial begin
+
+        // Init
+        rst = 1;
+        req_floor = 0;
+
+        #20;
+        rst = 0;
+
+        // Go to floor 3
+        #20;
+        req_floor = 3;
+
+        // Go to floor 6
+        #100;
+        req_floor = 6;
+
+        // Go to floor 1
+        #120;
+        req_floor = 1;
+
+        // Same floor
+        #100;
+        req_floor = 1;
+
+        // Reset
+        #50;
+        rst = 1;
+
+        #20;
+        rst = 0;
+
+        // Go to floor 7
+        #30;
+        req_floor = 7;
+
+        #200;
+
+        $stop;
+
+    end
+
+endmodule
