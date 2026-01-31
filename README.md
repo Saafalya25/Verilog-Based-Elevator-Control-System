@@ -1,1 +1,4 @@
 # Verilog-Based-Elevator-Control-System
+This project implements a digital elevator control system using Verilog. The system simulates an elevator for seven floors, responding to floor requests and moving up or down automatically while ensuring the door opens only once per floor. The design is based on a finite state machine (FSM) that handles movement control, floor selection, door open/close operations, and reset functionality. The elevator prioritizes pending requests, giving precedence to the lowest-numbered floor, and allows manual door closure through an input signal for safety and user control.
+
+The simulation can be run in ModelSim, where waveforms clearly demonstrate system behavior. Floor request signals trigger movement, with up and down indicators showing the elevator’s direction. The current_floor signal tracks real-time elevator position.
